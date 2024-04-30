@@ -29,8 +29,5 @@
 		"webpack-stream": "^7.0.0"
 	}
 }
-git remote add origin https://github.com/IdikiiD/FOODWeb.git
-git branch -M main
-git push -u origin main
 
 
