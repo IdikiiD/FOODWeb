@@ -217,8 +217,8 @@ window.addEventListener('DOMContentLoaded', function() {
         postData(item);
     })
 
-    function postData(form) {
-        form.addEventListener('submit', (e) => {
+    function postData(item) {
+        item.addEventListener('submit', (e) => {
             e.preventDefault();
 
             const statusMessage = document.createElement('img');
@@ -227,14 +227,14 @@ window.addEventListener('DOMContentLoaded', function() {
             display: block;
             margin: 0 auto;
             `;
-            form.append(statusMessage);
-            form.insertAdjacentElement("afterend", statusMessage)
+            item.append(statusMessage);
+            item.insertAdjacentElement("afterend", statusMessage)
 
             const request = new XMLHttpRequest();
             request.open('POST', 'serever.php')
 
             request.setRequestHeader('Content-Type', "application/json");
-            const formData = new FormData(form);
+            const formData = new FormData(item);
 
             const obj = {};
             formData.forEach(function (value, key) {
@@ -250,7 +250,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 if (request.status === 200) {
                     console.log(request.response);
                     showThanksModal(message.success)
-                    form.reset();
+                    item.reset();
                         statusMessage.remove()
                 } else {
                     showThanksModal(message.failure)
