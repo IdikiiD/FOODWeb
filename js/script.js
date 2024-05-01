@@ -1,7 +1,6 @@
-window.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('DOMContentLoaded', function () {
     // Tabs
-    let tabs = document.querySelectorAll('.tabheader__item'),
-        tabsContent = document.querySelectorAll('.tabcontent'),
+    let tabs = document.querySelectorAll('.tabheader__item'), tabsContent = document.querySelectorAll('.tabcontent'),
         tabsParent = document.querySelector('.tabheader__items');
 
     function hideTabContent() {
@@ -40,28 +39,19 @@ window.addEventListener('DOMContentLoaded', function() {
     const endDate = "2034-12-13";
 
     function getRemaining(endTime) {
-        const t = Date.parse(endDate) - Date.now(),
-            days = Math.floor(t / (1000 * 60 * 60 * 24)),
-            hours = Math.floor((t / (1000 * 60 * 60)) % 24),
-            minutes = Math.floor((t / 1000 / 60) % 60),
+        const t = Date.parse(endDate) - Date.now(), days = Math.floor(t / (1000 * 60 * 60 * 24)),
+            hours = Math.floor((t / (1000 * 60 * 60)) % 24), minutes = Math.floor((t / 1000 / 60) % 60),
             seconds = Math.floor((t / 1000) % 60);
 
         return {
-            total: t,
-            days: days,
-            hours: hours,
-            minutes: minutes,
-            seconds: seconds
+            total: t, days: days, hours: hours, minutes: minutes, seconds: seconds
         };
     }
 
     function setClock(selector, endTime) {
-        const timer = document.querySelector(selector),
-            days = timer.querySelector('#days'),
-            hours = timer.querySelector('#hours'),
-            minutes = timer.querySelector('#minutes'),
-            seconds = timer.querySelector('#seconds'),
-            timeInterval = setInterval(updateTime, 1000);
+        const timer = document.querySelector(selector), days = timer.querySelector('#days'),
+            hours = timer.querySelector('#hours'), minutes = timer.querySelector('#minutes'),
+            seconds = timer.querySelector('#seconds'), timeInterval = setInterval(updateTime, 1000);
 
         updateTime();
 
@@ -82,8 +72,7 @@ window.addEventListener('DOMContentLoaded', function() {
     setClock('.timer', endDate);
 
     // Modal
-    const modalTrigger = document.querySelectorAll('[data-modal]'),
-        modal = document.querySelector('.modal');
+    const modalTrigger = document.querySelectorAll('[data-modal]'), modal = document.querySelector('.modal');
 
     let timer = 0; // Переменная timer объявлена здесь
 
@@ -113,7 +102,7 @@ window.addEventListener('DOMContentLoaded', function() {
     });
 
     modal.addEventListener('click', (e) => {
-        if (e.target === modal || e.target.getAttribute('data-close') ==="") {
+        if (e.target === modal || e.target.getAttribute('data-close') === "") {
             triggerModalClose();
         }
     });
@@ -175,32 +164,11 @@ window.addEventListener('DOMContentLoaded', function() {
 
     }
 
-    new MenuTab(
-        "img/tabs/post.jpg",
-        "post",
-        'Меню "Постное"',
-        "Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.",
-        100,
-        '.menu .container'
-    ).render();
+    new MenuTab("img/tabs/post.jpg", "post", 'Меню "Постное"', "Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.", 100, '.menu .container').render();
 
-    new MenuTab(
-        "img/tabs/elite.jpg",
-        "elite",
-        'Меню "Премиум"',
-        "Меню \"Фитнес\" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!",
-        150,
-        '.menu .container'
-    ).render();
+    new MenuTab("img/tabs/elite.jpg", "elite", 'Меню "Премиум"', "Меню \"Фитнес\" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!", 150, '.menu .container').render();
 
-    new MenuTab(
-        "img/tabs/vegy.jpg",
-        "vegy",
-        'Меню "Фитнес"',
-        'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
-        80,
-        '.menu .container'
-    ).render();
+    new MenuTab("img/tabs/vegy.jpg", "vegy", 'Меню "Фитнес"', 'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!', 80, '.menu .container').render();
 
 
 //FORM
@@ -208,9 +176,7 @@ window.addEventListener('DOMContentLoaded', function() {
     const forms = document.querySelectorAll('form');
 
     const message = {
-        loading: 'img/spinner.svg',
-        success: 'Спасибо! Скоро мы с вами свяжемся!',
-        failure: 'Что-то пошло не так...'
+        loading: 'img/spinner.svg', success: 'Спасибо! Скоро мы с вами свяжемся!', failure: 'Что-то пошло не так...'
     };
 
     forms.forEach(item => {
@@ -229,11 +195,6 @@ window.addEventListener('DOMContentLoaded', function() {
             `;
             item.append(statusMessage);
             item.insertAdjacentElement("afterend", statusMessage)
-
-            const request = new XMLHttpRequest();
-            request.open('POST', 'serever.php')
-
-            request.setRequestHeader('Content-Type', "application/json");
             const formData = new FormData(item);
 
             const obj = {};
@@ -241,25 +202,28 @@ window.addEventListener('DOMContentLoaded', function() {
                 obj[key] = value
             })
 
-            const json = JSON.stringify(obj)
-
-
-            request.send(json)
-
-            request.addEventListener('load', () => {
-                if (request.status === 200) {
-                    console.log(request.response);
+            fetch('serever.php', {
+                method: "POST", headers: {
+                    'Content-Type': "application/json"
+                }, body: JSON.stringify(obj)
+            })
+                .then(data => {
+                    console.log(data);
                     showThanksModal(message.success)
                     item.reset();
-                        statusMessage.remove()
-                } else {
+                    statusMessage.remove()
+
+                })
+                .catch(() => {
                     showThanksModal(message.failure)
-                }
-            })
+                })
+                .finally(() => {
+                    item.reset();
+                })
         })
     }
 
-    function showThanksModal(message){
+    function showThanksModal(message) {
         const prevModalDialog = document.querySelector('.modal__dialog');
 
         prevModalDialog.classList.add('hide');
@@ -276,12 +240,12 @@ window.addEventListener('DOMContentLoaded', function() {
 
 
         document.querySelector('.modal').append(thanksModal)
-        setTimeout(()=>{
+        setTimeout(() => {
             thanksModal.remove();
             prevModalDialog.classList.add('show');
             prevModalDialog.classList.remove('hide');
             triggerModalClose();
-        },4000);
+        }, 4000);
     }
 
 });
