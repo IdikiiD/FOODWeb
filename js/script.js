@@ -164,11 +164,22 @@ window.addEventListener('DOMContentLoaded', function () {
 
     }
 
-    new MenuTab("img/tabs/post.jpg", "post", 'Меню "Постное"', "Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.", 100, '.menu .container').render();
+    const getResourse = async (url, data) => {
+        const res = await fetch(url);
 
-    new MenuTab("img/tabs/elite.jpg", "elite", 'Меню "Премиум"', "Меню \"Фитнес\" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!", 150, '.menu .container').render();
+        if (!res.ok){
+            throw new Error(`Could not fetch ${url}, status${res.status}`);
+        }
 
-    new MenuTab("img/tabs/vegy.jpg", "vegy", 'Меню "Фитнес"', 'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!', 80, '.menu .container').render();
+        return await res.json();
+    };
+
+    getResourse('http://localhost:3000/menu')
+        .then(data=>{
+           data.forEach(({img,altimg,title,descr,price}) => {
+               new MenuTab(img,altimg,title,descr,price, '.menu .container').render();
+           })
+        });
 
 
 //FORM
