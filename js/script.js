@@ -296,7 +296,7 @@ window.addEventListener('DOMContentLoaded', function () {
    }
    }
 
-   function slideNext(slideIndex,slides,){
+   function slideNext(slideIndex,slides){
        if (slideIndex === slides.length) {
           return 1;
        } else {
@@ -419,6 +419,13 @@ window.addEventListener('DOMContentLoaded', function () {
             slidesTotal(slides, total, current, slideIndex);
         });
     });
+    setInterval(() => {
+        offset = newOffsetNext(offset, width, slides);
+        newSlidesField(slidesField, offset);
+        slideIndex = slideNext(slideIndex, slides);
+        slidesTotal(slides, total, current, slideIndex);
+        dotVision(slideIndex, dots);
+    }, 3000);
 });
 
 
