@@ -1,3 +1,5 @@
+
+
 window.addEventListener('DOMContentLoaded', function () {
     // Tabs
     let tabs = document.querySelectorAll('.tabheader__item'), tabsContent = document.querySelectorAll('.tabcontent'),
@@ -271,7 +273,7 @@ window.addEventListener('DOMContentLoaded', function () {
         .then(res => console.log(res));
 
 
-    //Slider
+    //x
 
     let slideIndex = 1;
     let offset = 0;
@@ -286,57 +288,56 @@ window.addEventListener('DOMContentLoaded', function () {
         slidesField = document.querySelector('.offer__slider__inner'),
         width = window.getComputedStyle(slidesWrapper).width;
 
-   function slidesTotal(slides,total,current,slideIndex) {
-       if (slides.length < 10) {
-       total.textContent = `0${slides.length}`
-       current.textContent = `0${slideIndex}`
-   } else {
-       total.textContent = slides.length
-       current.textContent = slideIndex;
-   }
-   }
+    function slidesTotal(slides, total, current, slideIndex) {
+        if (slides.length < 10) {
+            total.textContent = `0${slides.length}`
+            current.textContent = `0${slideIndex}`
+        } else {
+            total.textContent = slides.length
+            current.textContent = slideIndex;
+        }
+    }
 
-   function slideNext(slideIndex,slides){
-       if (slideIndex === slides.length) {
-          return 1;
-       } else {
-           return slideIndex + 1;
-       }
-   }
+    function slideNext(slideIndex, slides) {
+        if (slideIndex === slides.length) {
+            return 1;
+        } else {
+            return slideIndex + 1;
+        }
+    }
 
-   function slideBack(slideIndex,slides){
-       if (slideIndex === 1) {
-           return slides.length;
-       } else {
-           return slideIndex - 1;
-       }
-   }
+    function slideBack(slideIndex, slides) {
+        if (slideIndex === 1) {
+            return slides.length;
+        } else {
+            return slideIndex - 1;
+        }
+    }
 
-   function dotVision (slideIndex,dots){
-       dots.forEach(dot => dot.style.opacity = '.5');
-       dots[slideIndex - 1].style.opacity = 1;
-   }
+    function dotVision(slideIndex, dots) {
+        dots.forEach(dot => dot.style.opacity = '.5');
+        dots[slideIndex - 1].style.opacity = 1;
+    }
 
-   function newSlidesField (slidesField,offset){
-       slidesField.style.transform = `translateX(-${offset}px)`;
-   }
+    function newSlidesField(slidesField, offset) {
+        slidesField.style.transform = `translateX(-${offset}px)`;
+    }
 
-   function newOffsetNext(offset,width,slides){
-       if (offset === +width.slice(0, width.length - 2) * (slides.length - 1)) {
-           return  0;
-       } else {
-           return offset + +width.slice(0, width.length - 2);
-       }
-   }
-    function newOffsetPrev(offset,width,slides){
+    function newOffsetNext(offset, width, slides) {
+        if (offset === +width.slice(0, width.length - 2) * (slides.length - 1)) {
+            return 0;
+        } else {
+            return offset + +width.slice(0, width.length - 2);
+        }
+    }
+
+    function newOffsetPrev(offset, width, slides) {
         if (offset === 0) {
             return offset + +width.slice(0, width.length - 2) * (slides.length - 1)
         } else {
             return offset - +width.slice(0, width.length - 2);
         }
     }
-
-
 
 
     slidesField.style.width = 100 * slides.length + '%';
@@ -351,7 +352,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     slider.style.position = 'relative';
     const indicators = document.createElement('ol'),
-          dots=[];
+        dots = [];
 
 
     indicators.classList.add('carousel-indicators');
@@ -387,7 +388,7 @@ window.addEventListener('DOMContentLoaded', function () {
             opacity: .5;
             transition: opacity .6s ease;
         `
-        if(i === 0){
+        if (i === 0) {
             dot.style.opacity = '1';
         }
         indicators.append(dot)
@@ -395,27 +396,27 @@ window.addEventListener('DOMContentLoaded', function () {
     }
 
     next.addEventListener('click', () => {
-        offset =  newOffsetNext(offset,width,slides);
-        newSlidesField(slidesField,offset);
-        slideIndex = slideNext(slideIndex,slides);
-        slidesTotal(slides,total,current,slideIndex);
-        dotVision (slideIndex,dots)
+        offset = newOffsetNext(offset, width, slides);
+        newSlidesField(slidesField, offset);
+        slideIndex = slideNext(slideIndex, slides);
+        slidesTotal(slides, total, current, slideIndex);
+        dotVision(slideIndex, dots)
     })
 
     prev.addEventListener('click', () => {
-        offset =  newOffsetPrev(offset,width,slides)
-        newSlidesField(slidesField,offset);
-        slideIndex = slideBack(slideIndex,slides);
+        offset = newOffsetPrev(offset, width, slides)
+        newSlidesField(slidesField, offset);
+        slideIndex = slideBack(slideIndex, slides);
         slidesTotal(slides, total, current, slideIndex)
-        dotVision (slideIndex,dots)
+        dotVision(slideIndex, dots)
     })
-    dots.forEach(dot =>{
-        dot.addEventListener('click',(e)=>{
+    dots.forEach(dot => {
+        dot.addEventListener('click', (e) => {
             const slideTo = e.target.getAttribute('data-slide-to');
             slideIndex = parseInt(slideTo);
             offset = +width.slice(0, width.length - 2) * (slideTo - 1);
-            newSlidesField(slidesField,offset);
-            dotVision (slideIndex,dots);
+            newSlidesField(slidesField, offset);
+            dotVision(slideIndex, dots);
             slidesTotal(slides, total, current, slideIndex);
         });
     });
@@ -426,6 +427,71 @@ window.addEventListener('DOMContentLoaded', function () {
         slidesTotal(slides, total, current, slideIndex);
         dotVision(slideIndex, dots);
     }, 3000);
+
+    //Calculator
+
+    const result = document.querySelector('.calculating__result span');
+    let sex, weight, height, age, ratio;
+
+    function calcTotal(){
+        if(!sex || !weight || !height || !age || !ratio){
+            result.textContent = "0" ;
+            return;
+        }
+
+        if(sex ==="female"){
+            result.textContent = Math.round((447.6 + (9.2 * weight) + (3.1 * height) - (4.3 * age)) * ratio);
+        }else{
+            result.textContent = Math.round( (88.36 + (13.4 * weight) + (4.8 * height) - (5.7 * age)) * ratio);
+        }
+    }
+    calcTotal();
+
+    function getStaticInfo(parentSelector, activeClass){
+        const elements = document.querySelectorAll(`${parentSelector} div`)
+            elements.forEach(elem =>{
+                if (e.target.getAttribute('data-ratio')){
+                    ratio = +e.target.getAttribute('data-ratio');
+                }else{
+                    sex =e.target.getAttribute('id');
+                }
+                console.log(ratio, sex);
+
+                elements.forEach(elem =>{
+                    elem.classList.remove(activeClass)
+                })
+                e.target.classList.add(activeClass);
+                calcTotal();
+            })
+    }
+
+    getStaticInfo('#gender','calculating__choose-item_active');
+    getStaticInfo('.calculating__choose_big','calculating__choose-item_active');
+
+    function getDynamInfo(selector){
+        const input = document.querySelector(selector);
+
+        input.addEventListener('input', ()=>{
+            switch (input.getAttribute('id')){
+                case 'height':
+                    height = +input.value;
+                    break;
+                case 'weight':
+                    weight = +input.value;
+                    break;
+                case 'age':
+                    age = +input.value;
+                    break;
+            }
+            calcTotal();
+        })
+
+    }
+
+
+    getDynamInfo('#height');
+    getDynamInfo('#age');
+    getDynamInfo('#weight');
 });
 
 
