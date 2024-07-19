@@ -22,7 +22,7 @@ gulp.task("build-js", () => {
 			webpack({
 				mode: "development",
 				output: {
-					filename: "script.js",
+					filename: "пппппп.js",
 				},
 				watch: false,
 				devtool: "source-map",
@@ -102,7 +102,7 @@ gulp.task("prod", () => {
 			webpack({
 				mode: "production",
 				output: {
-					filename: "script.js",
+					filename: "пппппп.js",
 				},
 				module: {
 					rules: [

@@ -112,4 +112,4 @@ function calculator(){
     getDynamInfo('#age');
     getDynamInfo('#weight');
 }
-module.exports = calculator;
+export default calculator;

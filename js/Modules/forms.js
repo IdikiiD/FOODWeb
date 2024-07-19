@@ -82,4 +82,4 @@ function forms (){
         .then(data => data.json())
         .then(res => console.log(res));
 }
-module.exports = forms;
+export default forms;

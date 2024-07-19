@@ -152,4 +152,4 @@ function slider(){
         dotVision(slideIndex, dots);
     }, 3000);
 }
-module.exports = slider;
+export default slider;

@@ -37,4 +37,4 @@ function timer(){
 
     setClock('.timer', endDate);
 }
-module.exports = timer;
+export default timer;

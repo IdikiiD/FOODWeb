@@ -51,4 +51,4 @@ function modal(){
 
     console.log(timer)
 }
-module.exports = modal;
+export default modal;
