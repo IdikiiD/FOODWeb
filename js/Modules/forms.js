@@ -1,3 +1,6 @@
+import {triggerModalOpen, triggerModalClose} from "./modal";
+
+
 function forms (){
     const forms = document.querySelectorAll('form');
 
@@ -5,8 +8,12 @@ function forms (){
         loading: 'img/spinner.svg', success: 'Спасибо! Скоро мы с вами свяжемся!', failure: 'Что-то пошло не так...'
     };
 
+
+
+
     forms.forEach(item => {
         bindPostData(item);
+
     })
 
     const postData = async (url, data) => {
